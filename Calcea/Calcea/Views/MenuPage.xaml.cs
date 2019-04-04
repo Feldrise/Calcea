@@ -18,7 +18,9 @@ namespace Calcea.Views
 
 			menuItems = new List<HomeMenuItem>
 			{
-				new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
+				new HomeMenuItem {Id = MenuItemType.Browse, Title="Accueil" },
+				new HomeMenuItem { Id = MenuItemType.Schemas, Title = "Schemas"},
+				new HomeMenuItem { Id = MenuItemType.Maps, Title = "Carte"},
 				new HomeMenuItem {Id = MenuItemType.About, Title="About" }
 			};
 

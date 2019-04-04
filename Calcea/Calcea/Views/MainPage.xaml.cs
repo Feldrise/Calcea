@@ -29,6 +29,12 @@ namespace Calcea.Views
 					case (int)MenuItemType.Browse:
 						MenuPages.Add(id, new NavigationPage(new HomePage()));
 						break;
+					case (int)MenuItemType.Schemas:
+						MenuPages.Add(id, new NavigationPage(new SchemasPage()));
+						break;
+					case (int)MenuItemType.Maps:
+						MenuPages.Add(id, new NavigationPage(new MapsPage()));
+						break;
 					case (int)MenuItemType.About:
 						MenuPages.Add(id, new NavigationPage(new AboutPage()));
 						break;

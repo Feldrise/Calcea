@@ -7,6 +7,8 @@ namespace Calcea.Models
 	public enum MenuItemType
 	{
 		Browse,
+		Schemas,
+		Maps,
 		About
 	}
 	public class HomeMenuItem
@@ -14,5 +16,6 @@ namespace Calcea.Models
 		public MenuItemType Id { get; set; }
 
 		public string Title { get; set; }
+		public string ImageSrc { get; set; }
 	}
 }

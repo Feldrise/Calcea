@@ -9,9 +9,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="10">
-                            <Label Text="{Binding Title}" FontSize="20"/>
-                        </Grid>
+                        <StackLayout Padding="10" Orientation="Horizontal">
+							<Image Source="{Binding ImageSrc}" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                            <Label Text="{Binding Title}" FontSize="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
