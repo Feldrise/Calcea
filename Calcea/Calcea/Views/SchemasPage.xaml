@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="Calcea.Views.SchemasPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Schemas page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+		<StackLayout>
+			<Frame Style="{StaticResource CardStyleWhite}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+				<StackLayout>
+					<skia:SKCanvasView x:Name="CanvasView" PaintSurface="OnPainting" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+					<skia:SKCanvasView x:Name="CanvasView2" PaintSurface="OnPainting2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+				</StackLayout>
+			</Frame>
+		</StackLayout>
     </ContentPage.Content>
 </ContentPage>

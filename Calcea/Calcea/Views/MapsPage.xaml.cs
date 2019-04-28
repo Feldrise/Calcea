@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 
 namespace Calcea.Views
@@ -15,6 +16,8 @@ namespace Calcea.Views
 		public MapsPage ()
 		{
 			InitializeComponent ();
+
+			JourneyMap.RouteCoordinates = new List<Position>();
 		}
 	}
 }
