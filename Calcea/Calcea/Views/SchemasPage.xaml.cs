@@ -17,6 +17,12 @@ namespace Calcea.Views
 		public FrontSBody Body;
 		public FrontSBody PerfectBody;
 
+		private const float RatioQ = 0.485f;
+		private const float RatioG = 0.516f;
+
+		private float QX;
+		private float QY;
+
 		private float GX;
 		private float GY;
 
@@ -84,11 +90,40 @@ namespace Calcea.Views
 			canvas.DrawColor(SKColor.Parse("#cecece"));
 
 			GX = 0.5f * info.Width;
-			GY = ((172.0f - 88.7f) * info.Height / Body.Size);
+			GY = ((172.0f - RatioG * Body.Size) * info.Height / Body.Size);
+
+			QX = 0.5f * info.Width;
+			QY = ((172.0f - RatioQ * Body.Size) * info.Height / Body.Size);
 
 			PaintGrid(canvas, info);
 			PaintPerfectBody(canvas, info);
 			PaintUserBody(canvas, info);
+
+			SKPath gridPath = new SKPath();
+
+			// Draw the grid
+			gridPath.MoveTo(0.5f * info.Width, 0);
+			gridPath.LineTo(0.5f * info.Width, info.Height);
+			gridPath.MoveTo(0, 0.5f * info.Height);
+			gridPath.LineTo(info.Width, 0.5f * info.Height);
+
+			SKPaint paint = new SKPaint
+			{
+				Style = SKPaintStyle.Fill,
+				Color = SKColors.Cyan
+			};
+
+			canvas.DrawCircle(GX, GY, 25, paint);
+
+			// Create two SKPaint objects
+			SKPaint gridPaint = new SKPaint
+			{
+				Style = SKPaintStyle.Stroke,
+				Color = SKColors.Magenta,
+				StrokeWidth = 2
+			};
+
+			canvas.DrawPath(gridPath, gridPaint);
 		}
 
 		private void PaintGrid(SKCanvas canvas, SKImageInfo info)
@@ -118,23 +153,22 @@ namespace Calcea.Views
 			SKPath bodyPath = new SKPath();
 
 			float rightFootX = -Body.RightFootToG;
-			float rightFootY = 0.516f * Body.Size;
+			float rightFootY = RatioQ * Body.Size;
 
 			float leftFootX = Body.FootToFootDistance - Body.RightFootToG;
-			float leftFootY = 0.516f * Body.Size;
+			float leftFootY = RatioQ * Body.Size;
 
 			// Draw the body
 			// Fomat : bodyPath.LineTo(([RELATIVE X COORDINATE] + [DEMI X AXE]) * info.Width / [X AXE SIZE], ([RELATIVE Y COORDINATE] + [DEMI Y AXE]) * info.Height / [Y AXE SIZE]);
-			bodyPath.MoveTo(GX, GY);
+			bodyPath.MoveTo(QX, QY);
 			bodyPath.LineTo(ConvertToRelativeX(rightFootX, info), ConvertToRelativeY(rightFootY, info));
-			bodyPath.MoveTo(GX, GY);
+			bodyPath.MoveTo(QX, QY);
 			bodyPath.LineTo(ConvertToRelativeX(leftFootX, info), ConvertToRelativeY(leftFootY, info));
-			bodyPath.MoveTo(GX, GY);
-			bodyPath.LineTo(GX, 0);
+			bodyPath.MoveTo(QX, QY);
+			bodyPath.LineTo(QX, 0);
 
 			// Create two SKPaint objects
-			SKPaint bodyPaint = new SKPaint
-			{
+			SKPaint bodyPaint = new SKPaint {
 				Style = SKPaintStyle.Stroke,
 				Color = SKColors.Brown,
 				StrokeWidth = 30
@@ -149,19 +183,19 @@ namespace Calcea.Views
 			SKPath bodyPath = new SKPath();
 
 			float rightFootX = -PerfectBody.RightFootToG;
-			float rightFootY = 0.516f * PerfectBody.Size;
+			float rightFootY = RatioQ * PerfectBody.Size;
 
 			float leftFootX = PerfectBody.FootToFootDistance - PerfectBody.RightFootToG;
-			float leftFootY = 0.516f * PerfectBody.Size;
+			float leftFootY = RatioQ * PerfectBody.Size;
 
 			// Draw the body
 			// Fomat : bodyPath.LineTo(([RELATIVE X COORDINATE] + [DEMI X AXE]) * info.Width / [X AXE SIZE], ([RELATIVE Y COORDINATE] + [DEMI Y AXE]) * info.Height / [Y AXE SIZE]);
-			bodyPath.MoveTo(GX, GY);
+			bodyPath.MoveTo(QX, QY);
 			bodyPath.LineTo(ConvertToRelativeX(rightFootX, info), ConvertToRelativeY(rightFootY, info));
-			bodyPath.MoveTo(GX, GY);
+			bodyPath.MoveTo(QX, QY);
 			bodyPath.LineTo(ConvertToRelativeX(leftFootX, info), ConvertToRelativeY(leftFootY, info));
-			bodyPath.MoveTo(GX, GY);
-			bodyPath.LineTo(GX, 0);
+			bodyPath.MoveTo(QX, QY);
+			bodyPath.LineTo(QX, 0);
 
 			// Create two SKPaint objects
 			SKPaint bodyPaint = new SKPaint
